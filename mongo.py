@@ -8,11 +8,13 @@ load_dotenv(find_dotenv())
 MONGO_CONNECTION_STRING = os.environ.get("MONGO_CONNECTION_STRING")
 
 connection_string = f"{MONGO_CONNECTION_STRING}"
-client = MongoClient(connection_string)
 
-language_learning_db = client.language_learning
+if connection_string:
+    client = MongoClient(connection_string)
 
-user_collection = language_learning_db.users
+    language_learning_db = client.language_learning
+
+    user_collection = language_learning_db.users
 
 def add_new_vocabulary(args):
     user_id = ObjectId(args["id"])
